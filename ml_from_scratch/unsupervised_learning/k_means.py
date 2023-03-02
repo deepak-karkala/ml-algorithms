@@ -1,13 +1,21 @@
-import numpy as np
 import random
+import numpy as np
 
 class KMeans():
     """K-means clustering
+    Parameters:
+    -----------
+    k: int
+        The number of clusters the algorithm will form.
+    max_iterations: int
+        The number of iterations the algorithm will run for if it does
+        not converge before that. 
     """
 
     def __init__(self, k=2, max_iterations=100):
         self.k = k
         self.max_iterations = max_iterations
+        self.centroids = []
 
     def fit(self, X):
         """Compute cluster centroids for given data
@@ -26,13 +34,11 @@ class KMeans():
             diff = self.centroids - prev_centroids
             if not diff.any():
                 break
-        
 
     def predict(self, X):
         """Assign cluster labels to given data
         """
         return self._assign_clusters(X, self.centroids)
-    
 
     def _init_random_centroids(self, X):
         """Initialise cluster centroids to random k data points"""
